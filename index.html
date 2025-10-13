@@ -160,6 +160,8 @@
                     <option value="highschool">اعدادية</option>
                     <option value="diploma">دبلوم</option>
                     <option value="bachelor">بكالوريوس</option>
+                    <option value="master">ماجستير</option>
+                    <option value="doctorate">دكتوراه</option>
                 </select>
             </div>
             
@@ -293,7 +295,14 @@
     </div>
 
     <footer class="text-center my-6 text-gray-500 text-sm">
-        <p>&copy; 2025 - جميع الحقوق محفوظة.</p>
+        <div class="flex justify-center items-center gap-4">
+            <p>تم تطوير البرنامج من قبل سيف الزيدي &copy; 2025</p>
+            <a href="https://www.facebook.com/SaifAli40" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 transition">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
     </footer>
 
     <script>
@@ -332,7 +341,6 @@
 
         form.addEventListener('submit', function(event) {
             event.preventDefault();
-            // ... (rest of the calculation logic)
             const jobGrade = document.getElementById('jobGrade').value;
             const serviceStage = document.getElementById('serviceStage').value;
             const jobType = document.getElementById('jobType').value;
@@ -342,7 +350,8 @@
             const childrenCount = parseInt(document.getElementById('childrenCount').value) || 0;
             const baseSalaryRaw = salaryScale[jobGrade]?.[serviceStage];
             if (!baseSalaryRaw) {
-                alert("الراتب لهذه الدرجة والمرحلة غير محدد في الجدول.");
+                // Using a custom modal/alert in the future would be better
+                console.error("الراتب لهذه الدرجة والمرحلة غير محدد في الجدول.");
                 return;
             }
             const baseSalary = baseSalaryRaw * 1000;
@@ -354,6 +363,8 @@
                 case 'highschool': certPercentage = 0.25; jobTitle = 'فني'; break;
                 case 'diploma': certPercentage = 0.35; jobTitle = 'فني أقدم'; break;
                 case 'bachelor': certPercentage = 0.50; jobTitle = 'غير محدد'; break;
+                case 'master': certPercentage = 0.75; jobTitle = 'باحث / خبير'; break;
+                case 'doctorate': certPercentage = 1.00; jobTitle = 'خبير استشاري'; break;
                 default: certPercentage = 0.15; jobTitle = 'حرفي'; break;
             }
             const certificateAllowance = baseSalary * certPercentage;
@@ -427,9 +438,9 @@
             const prompt = `بصفتك خبير مالي، قم بإنشاء خطة ميزانية شهرية بسيطة ومفصلة لشخص يعيش في بغداد، العراق، وراتبه الصافي هو ${netSalary.toLocaleString('ar-IQ')} دينار عراقي. 
             استخدم التنسيق التالي:
             - مقدمة قصيرة.
-            - عنوان "تفاصيل الميزانية المقترحة:"
+            - عنوان "**تفاصيل الميزانية المقترحة:**"
             - قائمة نقطية لكل فئة (مثل: **السكن:** 25% - 30% | حوالي X دينار). غطي الفئات الأساسية (السكن، الفواتير، الطعام، النقل، الصحة) والثانوية (التعليم/التطوير، الترفيه، الادخار، الطوارئ).
-            - عنوان "3 نصائح ذهبية للالتزام بالميزانية:"
+            - عنوان "**3 نصائح ذهبية للالتزام بالميزانية:**"
             - قائمة مرقمة لثلاث نصائح عملية ومختصرة.`;
 
             const payload = {
@@ -465,11 +476,11 @@
         
         function simpleMarkdownToHtml(text) {
              return text
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
-                .replace(/\* (.*?)(?=\n\* |\n\n|$)/g, '<li>$1</li>') // List items
-                .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>') // Wrap lists in <ul>
-                .replace(/(\d)\. (.*?)(?=\n\d\.|\n\n|$)/g, '<li>$2</li>') // Numbered list items
-                .replace(/(<ol>[\s\S]*)?<li>(.*?)<\/li>/gs, (match, p1) => p1 ? match : `<ol>${match}</ol>`) // Wrap numbered lists in <ol>
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
+                .replace(/^- (.*$)/gm, '<li>$1</li>')
+                .replace(/(\<li\>.*?\<\/li\>)/gs, '<ul>$1</ul>')
+                .replace(/^\d+\. (.*$)/gm, '<li>$1</li>')
+                .replace(/(<ol>[\s\S]*)?<li>(.*?)<\/li>/gs, (match, p1) => p1 ? match : `<ol>${match}</ol>`)
                 .replace(/\n/g, '<br>');
         }
     </script>
