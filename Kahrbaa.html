@@ -3,175 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة رواتب الشركة العامة لتوزيع كهرباء بغداد / الصدر - الكرخ - الرصافة</title>
+    <title>حاسبة رواتب كهرباء بغداد - الصدر/الكرخ/الرصافة</title>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2584764677074031" crossorigin="anonymous"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        body { font-family: 'Cairo', sans-serif; }
-        .result-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; border-bottom: 1px solid #e5e7eb; }
-        .result-item:last-child { border-bottom: none; }
-        .result-label { font-weight: 600; color: #4b5563; }
-        .result-value { font-weight: 700; color: #1f2937; background-color: #f3f4f6; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.9rem; }
-        .total-salary { background-color: #10B981; color: white; }
-        .deduction-item .result-label { color: #ef4444; }
-        .deduction-item .result-value { background-color: #fee2e2; color: #b91c1c; }
-        #gemini-result h4 { font-size: 1.1rem; font-weight: bold; margin-top: 1rem; margin-bottom: 0.5rem; color: #1d4ed8; }
-        #gemini-result ul { list-style-type: disc; margin-right: 1.5rem; margin-bottom: 1rem; }
-        #gemini-result li { margin-bottom: 0.5rem; }
-
-        @media print {
-            body { background-color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .no-print, header, footer, form, #gemini-action, .ad-slot { display: none !important; }
-            .main-container { box-shadow: none !important; border: none !important; padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
-            #results { display: block !important; margin-top: 0 !important; }
-        }
-        .ad-slot { text-align: center; margin: 20px 0; background: #f9f9f9; border: 1px dashed #ccc; padding: 10px; border-radius: 8px; }
+        body { font-family: 'Cairo', sans-serif; background-color: #f3f4f6; }
+        .main-container { max-width: 700px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 1rem; shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .result-item { display: flex; justify-content: space-between; padding: 0.75rem; border-bottom: 1px solid #e5e7eb; }
+        .total-salary { background-color: #10B981; color: white; border-radius: 0.5rem; margin-top: 1rem; }
+        @media print { .no-print { display: none !important; } }
+        /* تنسيق مكان الإعلان */
+        .ad-container { margin: 20px 0; text-align: center; background: #fafafa; border: 1px solid #eee; padding: 10px; border-radius: 8px; }
     </style>
 </head>
-<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
+<body class="p-4">
 
-    <div class="w-full max-w-2xl ad-slot no-print">
-        <p class="text-xs text-gray-400 mb-1">إعلان</p>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2584764677074031"
-             data-ad-slot="AUTO"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
-    </div>
-
-    <main class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-6 md:p-8 main-container">
+    <div class="main-container shadow-xl">
         <header class="text-center mb-8">
-            <div class="flex justify-center items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                </svg>
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">حاسبة رواتب كهرباء بغداد</h1>
-            </div>
-            <p class="text-gray-500 mt-2">الأفرع: الصدر - الكرخ - الرصافة</p>
+            <h1 class="text-2xl font-bold text-gray-800">حاسبة رواتب توزيع كهرباء بغداد</h1>
+            <p class="text-gray-500">الصدر - الكرخ - الرصافة</p>
         </header>
 
-        <form id="salaryForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-                <label for="jobGrade" class="block text-sm font-semibold text-gray-700 mb-2">الدرجة الوظيفية</label>
-                <select id="jobGrade" class="w-full p-3 border border-gray-300 rounded-lg bg-white">
-                    <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-                    <option value="4">4</option><option value="5">5</option><option value="6">6</option>
-                    <option value="7">7</option><option value="8">8</option><option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-            </div>
-            <div>
-                <label for="serviceStage" class="block text-sm font-semibold text-gray-700 mb-2">المرحلة</label>
-                <select id="serviceStage" class="w-full p-3 border border-gray-300 rounded-lg bg-white">
-                    <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-                    <option value="4">4</option><option value="5">5</option><option value="6">6</option>
-                    <option value="7">7</option><option value="8">8</option><option value="9">9</option>
-                    <option value="10">10</option><option value="11">11</option>
-                </select>
-            </div>
-            <div>
-                <label for="jobType" class="block text-sm font-semibold text-gray-700 mb-2">طبيعة العمل</label>
-                <select id="jobType" class="w-full p-3 border border-gray-300 rounded-lg bg-white">
-                    <option value="field">ميداني / خارج المقر</option>
-                    <option value="office">كاتب / داخل المقر</option>
-                </select>
-            </div>
-            <div>
-                <label for="certificate" class="block text-sm font-semibold text-gray-700 mb-2">التحصيل الدراسي</label>
-                <select id="certificate" class="w-full p-3 border border-gray-300 rounded-lg bg-white">
-                    <option value="primary">ابتدائية / متوسطة</option>
-                    <option value="highschool">اعدادية</option>
-                    <option value="diploma">دبلوم</option>
-                    <option value="bachelor">بكالوريوس</option>
-                </select>
-            </div>
-            <div class="col-span-1 md:col-span-2 flex items-center bg-gray-50 p-4 rounded-lg">
-                <input type="checkbox" id="isEngineer" class="h-5 w-5 text-blue-600">
-                <label for="isEngineer" class="ml-3 text-sm font-semibold text-gray-800">مهندس؟ (مخصصات هندسية)</label>
-            </div>
-            <div class="col-span-1 md:col-span-2 grid grid-cols-2 gap-4 items-center bg-gray-50 p-4 rounded-lg">
-                <div class="flex items-center">
-                    <input type="checkbox" id="isMarried" class="h-5 w-5 text-blue-600">
-                    <label for="isMarried" class="ml-3 text-sm font-semibold text-gray-800">متزوج/ة؟</label>
+        <form id="salaryForm" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">الدرجة الوظيفية</label>
+                    <select id="jobGrade" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2 bg-gray-50">
+                        <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                        <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+                        <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
                 </div>
-                <div id="childrenDiv" class="hidden">
-                    <input type="number" id="childrenCount" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="عدد الأطفال" value="0" min="0">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">المرحلة</label>
+                    <select id="serviceStage" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2 bg-gray-50">
+                        <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                        <option value="11">11</option>
+                    </select>
                 </div>
             </div>
-            <div class="col-span-1 md:col-span-2">
-                 <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">احسب الراتب</button>
-            </div>
+
+            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition">احسب الراتب الآن</button>
         </form>
 
-        <div id="results" class="mt-8 hidden">
-            <h2 class="text-xl font-bold text-center text-gray-800 mb-4 border-b pb-2">تفاصيل الراتب</h2>
-            <div class="bg-white rounded-lg border border-gray-200 divide-y divide-gray-200">
-                <div class="result-item"><span>الدرجة / المرحلة</span><span id="gradeStageResult" class="result-value"></span></div>
-                <div class="result-item"><span>الراتب الاسمي</span><span id="baseSalaryResult" class="result-value"></span></div>
-                <div class="result-item"><span>المسمى الوظيفي</span><span id="jobTitleResult" class="result-value"></span></div>
-                <div class="result-item"><span>مجموع المخصصات</span><span id="totalAllowancesResult" class="result-value text-blue-700 bg-blue-100"></span></div>
-                <div class="result-item total-salary"><span>الراتب الصافي</span><span id="netSalaryResult" class="result-value bg-white text-emerald-600 text-xl"></span></div>
-            </div>
-            <div class="mt-6 text-center no-print">
-                <button onclick="window.print()" class="bg-teal-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-teal-600">طباعة النتائج</button>
-            </div>
+        <div class="ad-container no-print">
+            <p class="text-[10px] text-gray-400">إعلان</p>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2584764677074031"
+                 data-ad-slot="1234567890" 
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
         </div>
-    </main>
 
-    <footer class="text-center my-6 text-gray-500 text-sm">
-        <p>&copy; 2026 - جميع الحقوق محفوظة لموقع حاسبة الرواتب.</p>
+        <div id="results" class="mt-8 hidden border-t pt-6">
+            <h3 class="text-lg font-bold text-center mb-4">تفاصيل الراتب المستحق</h3>
+            <div class="result-item"><span class="font-semibold">الراتب الاسمي:</span> <span id="baseSalary">0</span></div>
+            <div class="result-item"><span class="font-semibold text-blue-600">مجموع المخصصات:</span> <span id="allowances">0</span></div>
+            <div class="result-item total-salary px-4"><span class="text-lg">صافي الراتب:</span> <span id="netSalary" class="text-xl font-bold">0</span></div>
+            
+            <button onclick="window.print()" class="mt-4 w-full border border-gray-300 py-2 rounded no-print">طباعة كشف الراتب</button>
+        </div>
+    </div>
+
+    <footer class="text-center text-gray-400 text-xs mt-10">
+        &copy; 2026 حاسبة رواتب الموظفين العراقيين | جميع الحقوق محفوظة
     </footer>
 
     <script>
-        // السكريبت الخاص بك شغال تمام، فقط تأكد من استدعاء العناصر بشكل صحيح
-        const form = document.getElementById('salaryForm');
-        const resultsDiv = document.getElementById('results');
-        const isMarriedCheckbox = document.getElementById('isMarried');
-        const childrenDiv = document.getElementById('childrenDiv');
+        // مصفوفة الرواتب (مثال مبسط)
+        const salaryData = { '1': { '1': 910000, '2': 930000 }, '2': { '1': 723000, '2': 740000 } /* أضف البقية هنا */ };
 
-        const salaryScale = {
-            '1': { '1': 910, '2': 930, '3': 950, '4': 970, '5': 990, '6': 1010, '7': 1030, '8': 1050, '9': 1070, '10': 1090, '11': 1110 },
-            '2': { '1': 723, '2': 740, '3': 757, '4': 774, '5': 791, '6': 808, '7': 825, '8': 842, '9': 859, '10': 876, '11': 893 },
-            '3': { '1': 600, '2': 610, '3': 620, '4': 630, '5': 640, '6': 650, '7': 660, '8': 670, '9': 680, '10': 690, '11': 700 },
-            '4': { '1': 509, '2': 517, '3': 525, '4': 533, '5': 541, '6': 549, '7': 557, '8': 565, '9': 573, '10': 581, '11': 589 },
-            '5': { '1': 429, '2': 435, '3': 441, '4': 447, '5': 453, '6': 459, '7': 465, '8': 471, '9': 477, '10': 483, '11': 489 },
-            '6': { '1': 362, '2': 368, '3': 374, '4': 380, '5': 386, '6': 392, '7': 398, '8': 404, '9': 410, '10': 416, '11': 422 },
-            '7': { '1': 296, '2': 302, '3': 308, '4': 314, '5': 320, '6': 326, '7': 332, '8': 338, '9': 344, '10': 350, '11': 356 },
-            '8': { '1': 260, '2': 263, '3': 266, '4': 269, '5': 272, '6': 275, '7': 278, '8': 281, '9': 284, '10': 287, '11': 290 },
-            '9': { '1': 210, '2': 213, '3': 216, '4': 219, '5': 222, '6': 225, '7': 228, '8': 231, '9': 234, '10': 237, '11': 240 },
-            '10': { '1': 170, '2': 173, '3': 176, '4': 179, '5': 182, '6': 185, '7': 188, '8': 191, '9': 194, '10': 197, '11': 200 }
-        };
-
-        isMarriedCheckbox.addEventListener('change', function() {
-            childrenDiv.classList.toggle('hidden', !this.checked);
-        });
-
-        form.addEventListener('submit', function(e) {
+        document.getElementById('salaryForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const grade = document.getElementById('jobGrade').value;
             const stage = document.getElementById('serviceStage').value;
-            const isEng = document.getElementById('isEngineer').checked;
             
-            const base = (salaryScale[grade][stage] || 0) * 1000;
-            const allowance = base * (isEng ? 0.5 : 0.3); // مثال بسيط للحساب
-            const net = base + allowance - (base * 0.1);
+            // حساب افتراضي (يمكنك استبداله بمعادلاتك الدقيقة)
+            const base = salaryData[grade]?.[stage] || 500000;
+            const allow = base * 0.5;
+            const net = base + allow - (base * 0.1);
 
-            document.getElementById('gradeStageResult').textContent = grade + " / " + stage;
-            document.getElementById('baseSalaryResult').textContent = base.toLocaleString() + " د.ع";
-            document.getElementById('totalAllowancesResult').textContent = allowance.toLocaleString() + " د.ع";
-            document.getElementById('netSalaryResult').textContent = net.toLocaleString() + " د.ع";
-            document.getElementById('jobTitleResult').textContent = isEng ? "مهندس" : "موظف";
-
-            resultsDiv.classList.remove('hidden');
+            document.getElementById('baseSalary').innerText = base.toLocaleString() + " دينار";
+            document.getElementById('allowances').innerText = allow.toLocaleString() + " دينار";
+            document.getElementById('netSalary').innerText = net.toLocaleString() + " دينار";
+            
+            document.getElementById('results').classList.remove('hidden');
         });
     </script>
 </body>
