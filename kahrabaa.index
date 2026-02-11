@@ -1,104 +1,40 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2584764677074031"
-     crossorigin="anonymous"></script>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حاسبة رواتب الشركة العامة لتوزيع كهرباء بغداد / الصدر - الكرخ - الرصافة</title>
-    <!-- Tailwind CSS -->
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2584764677074031"
+     crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Cairo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-        }
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        .result-item:last-child {
-            border-bottom: none;
-        }
-        .result-label {
-            font-weight: 600;
-            color: #4b5563;
-        }
-        .result-value {
-            font-weight: 700;
-            color: #1f2937;
-            background-color: #f3f4f6;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.9rem;
-        }
-        .total-salary {
-            background-color: #10B981;
-            color: white;
-        }
-        .deduction-item .result-label {
-            color: #ef4444;
-        }
-        .deduction-item .result-value {
-            background-color: #fee2e2;
-            color: #b91c1c;
-        }
-        #gemini-result h4 {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-            color: #1d4ed8;
-        }
-        #gemini-result ul {
-            list-style-type: disc;
-            margin-right: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        #gemini-result li {
-            margin-bottom: 0.5rem;
-        }
+        body { font-family: 'Cairo', sans-serif; }
+        .result-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; border-bottom: 1px solid #e5e7eb; }
+        .result-item:last-child { border-bottom: none; }
+        .result-label { font-weight: 600; color: #4b5563; }
+        .result-value { font-weight: 700; color: #1f2937; background-color: #f3f4f6; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.9rem; }
+        .total-salary { background-color: #10B981; color: white; }
+        .deduction-item .result-label { color: #ef4444; }
+        .deduction-item .result-value { background-color: #fee2e2; color: #b91c1c; }
+        #gemini-result h4 { font-size: 1.1rem; font-weight: bold; margin-top: 1rem; margin-bottom: 0.5rem; color: #1d4ed8; }
+        #gemini-result ul { list-style-type: disc; margin-right: 1.5rem; margin-bottom: 1rem; }
+        #gemini-result li { margin-bottom: 0.5rem; }
 
         @media print {
-            body {
-                background-color: white !important;
-                -webkit-print-color-adjust: exact; 
-                print-color-adjust: exact;
-            }
-            .no-print, header, footer, form, #gemini-action {
-                display: none !important;
-            }
-            .main-container {
-                box-shadow: none !important;
-                border: none !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                max-width: 100% !important;
-            }
-            #results {
-                display: block !important;
-                margin-top: 0 !important;
-            }
-            .result-item, #results > div {
-                border-color: #999;
-            }
-             .total-salary {
-                background-color: #10B981 !important;
-                color: white !important;
-            }
-            .deduction-item .result-value {
-                background-color: #fee2e2 !important;
-                color: #b91c1c !important;
-            }
+            body { background-color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .no-print, header, footer, form, #gemini-action { display: none !important; }
+            .main-container { box-shadow: none !important; border: none !important; padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
+            #results { display: block !important; margin-top: 0 !important; }
+            .result-item, #results > div { border-color: #999; }
+             .total-salary { background-color: #10B981 !important; color: white !important; }
+            .deduction-item .result-value { background-color: #fee2e2 !important; color: #b91c1c !important; }
         }
     </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2584764677074031"
-     crossorigin="anonymous"></script>
+</head>
 <body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
 
     <main class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-6 md:p-8 main-container">
@@ -118,32 +54,18 @@
             <div>
                 <label for="jobGrade" class="block text-sm font-semibold text-gray-700 mb-2">الدرجة الوظيفية</label>
                 <select id="jobGrade" name="jobGrade" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white" required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                    <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+                    <option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
                 </select>
             </div>
             <div>
                 <label for="serviceStage" class="block text-sm font-semibold text-gray-700 mb-2">المرحلة (سنوات الخدمة)</label>
                 <select id="serviceStage" name="serviceStage" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white" required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                    <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+                    <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+                    <option value="10">10</option><option value="11">11</option>
                 </select>
             </div>
 
@@ -269,7 +191,6 @@
                     طباعة النتائج
                 </button>
             </div>
-            <!-- Gemini Feature Button -->
             <div id="gemini-action" class="mt-6 text-center no-print hidden">
                 <button id="getPlanBtn" class="w-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:from-purple-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform transform hover:scale-105">
                     ✨ إنشاء خطة مالية شهرية
@@ -278,7 +199,6 @@
         </div>
     </main>
 
-    <!-- Gemini Modal -->
     <div id="gemini-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 hidden z-50 transition-opacity duration-300">
         <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col transform transition-all duration-300 scale-95">
             <div class="flex justify-between items-center p-4 border-b">
@@ -286,11 +206,9 @@
                 <button id="closeModalBtn" class="text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
             </div>
             <div class="p-6 overflow-y-auto" id="gemini-content-area">
-                <!-- Spinner -->
                 <div id="loading-spinner" class="flex justify-center items-center h-48">
                     <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
                 </div>
-                <!-- Content will be injected here -->
                 <div id="gemini-result" class="prose max-w-none"></div>
             </div>
         </div>
@@ -352,7 +270,6 @@
             const childrenCount = parseInt(document.getElementById('childrenCount').value) || 0;
             const baseSalaryRaw = salaryScale[jobGrade]?.[serviceStage];
             if (!baseSalaryRaw) {
-                // Using a custom modal/alert in the future would be better
                 console.error("الراتب لهذه الدرجة والمرحلة غير محدد في الجدول.");
                 return;
             }
@@ -434,8 +351,18 @@
             loadingSpinner.style.display = 'flex';
             resultDiv.innerHTML = '';
 
-            const apiKey = ""; // Provided by the environment
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            // 👇👇👇 ضع مفتاح الـ API الخاص بك هنا بين علامات التنصيص 👇👇👇
+            const apiKey = ""; 
+            // 👆👆👆 احصل عليه من Google AI Studio 👆👆👆
+
+            if (!apiKey) {
+                loadingSpinner.style.display = 'none';
+                resultDiv.innerHTML = '<p class="text-red-500 font-bold">⚠️ خطأ: يجب وضع مفتاح API الخاص بك في الكود (السطر 320 تقريباً) لكي تعمل هذه الميزة.</p>';
+                return;
+            }
+
+            // استخدمت موديل مستقر أكثر لضمان العمل
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
             
             const prompt = `بصفتك خبير مالي، قم بإنشاء خطة ميزانية شهرية بسيطة ومفصلة لشخص يعيش في بغداد، العراق، وراتبه الصافي هو ${netSalary.toLocaleString('ar-IQ')} دينار عراقي. 
             استخدم التنسيق التالي:
@@ -470,7 +397,7 @@
                 }
             } catch (error) {
                 console.error("Error calling Gemini API:", error);
-                resultDiv.innerHTML = `<p class="text-red-500 text-center">حدث خطأ أثناء الاتصال بالخدمة. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.</p>`;
+                resultDiv.innerHTML = `<p class="text-red-500 text-center">حدث خطأ أثناء الاتصال بالخدمة. يرجى التأكد من مفتاح API واتصالك بالإنترنت.</p>`;
             } finally {
                 loadingSpinner.style.display = 'none';
             }
