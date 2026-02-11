@@ -1,1 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة رواتب كهرباء بغداد - الصدر/الكرخ/الرصافة</title>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2584764677074031"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .main-container {
+            max-width: 700px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .total-salary {
+            background-color: #10B981;
+            color: white;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            padding: 1rem;
+        }
+
+        .ad-container {
+            margin: 20px 0;
+            text-align: center;
+            background: #fafafa;
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="p-4">
+
+    <div class="main-container shadow-xl">
+        <header class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-800">حاسبة رواتب توزيع كهرباء بغداد</h1>
+            <p class="text-gray-500">الصدر - الكرخ - الرصافة</p>
+        </header>
+
+        <form id="salaryForm" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">الدرجة الوظيفية</label>
+                    <select id="jobGrade" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2 bg-gray-50">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">المرحلة</label>
+                    <select id="serviceStage"
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2 bg-gray-50">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit"
+                class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition">احسب
+                الراتب الآن</button>
+        </form>
+
+        <div class="ad-container no-print">
+            <p class="text-[10px] text-gray-400 mb-2">إعلان</p>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2584764677074031"
+                data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <div id="results" class="mt-8 hidden border-t pt-6">
+            <h3 class="text-lg font-bold text-center mb-4">تفاصيل الراتب المستحق</h3>
+
+            <div class="result-item">
+                <span class="font-semibold">الراتب الاسمي:</span>
+                <span id="baseSalary">0</span>
+            </div>
+
+            <div class="result-item">
+                <span class="font-semibold text-blue-600">مجموع المخصصات:</span>
+                <span id="allowances">0</span>
+            </div>
+
+            <div class="result-item total-salary flex justify-between items-center">
+                <span class="text-lg">صافي الراتب:</span>
+                <span id="netSalary" class="text-xl font-bold">0</span>
+            </div>
+
+            <button onclick="window.print()"
+                class="mt-4 w-full border border-gray-300 py-2 rounded hover:bg-gray-50 transition no-print">طباعة كشف
+                الراتب</button>
+        </div>
+    </div>
+
+    <footer class="text-center text-gray-400 text-xs mt-10 mb-6">
+        &copy; 2026 حاسبة رواتب الموظفين العراقيين | جميع الحقوق محفوظة
+    </footer>
+
+    <script>
+        // مصفوفة الرواتب (مثال - يحتاج لتحديث بالبيانات الحقيقية لوزارة الكهرباء)
+        const salaryData = {
+            '1': { '1': 910000, '2': 930000, '3': 950000, '4': 970000 }, // مثال
+            '2': { '1': 723000, '2': 740000, '3': 757000 },
+            // ... يمكنك إضافة باقي الدرجات هنا
+        };
+
+        document.getElementById('salaryForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const grade = document.getElementById('jobGrade').value;
+            const stage = document.getElementById('serviceStage').value;
+
+            // منطق الحساب (مبسط للمثال)
+            // إذا لم يتم العثور على القيمة في المصفوفة، نستخدم قيمة افتراضية 500,000 لتجنب الخطأ
+            let base = 500000;
+            if (salaryData[grade] && salaryData[grade][stage]) {
+                base = salaryData[grade][stage];
+            } else {
+                // معادلة تقريبية إذا لم تكن البيانات مدخلة: 
+                // الراتب الاسمي التقريبي = 400000 + (الدرجة * 50000) + (المرحلة * 10000) - مجرد مثال
+                base = 400000 + ((11 - grade) * 50000) + (stage * 10000);
+            }
+
+            // المخصصات (مثال: 50% زوجية وأطفال وشهادة)
+            const allow = base * 0.5;
+
+            // الاستقطاعات (مثال: 10% تقاعد)
+            const deductions = base * 0.1;
+
+            const net = base + allow - deductions;
+
+            // تحديث الواجهة
+            document.getElementById('baseSalary').innerText = base.toLocaleString() + " دينار";
+            document.getElementById('allowances').innerText = allow.toLocaleString() + " دينار";
+            document.getElementById('netSalary').innerText = net.toLocaleString() + " دينار";
+
+            // إظهار النتائج
+            document.getElementById('results').classList.remove('hidden');
+        });
+    </script>
+</body>
+
+</html>
 
